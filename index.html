@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <title>Hello, world!</title>
+  </head>
+  <body style="background-color: black;">
+    <div class="container" style="max-width:100%;">
+        
+        <div class="header">
+            <img src="images/shanks.png" class="headerImage">
+            <span class="headerTitle">
+                COLLEGE OF ONE PIECE
+            </span> 
+        </div>
+        <div class="web-background">
+            <div class="form-heading">
+                REGISTRATION FORM
+            </div>
+            <form class="form-body" onsubmit="return field_val.expose_validation()" method="POST" id="form">
+                <div class="form-group form-group-style">
+                    <label class="labelDsip">NAME<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="text" id="nameFirst" name="nameFirst" class="form-control " placeholder="First name">
+                            <small id="nameFirstHelp" class="form-text invalidError"></small>
+                        </div>
+                        <div class="col">
+                            <input type="text" id="nameSecond" name="nameSecond" class="form-control" placeholder="Middle name" >
+                            <small id="nameSecondHelp" class="form-text invalidError"></small>
+                        </div>
+                        <div class="col">
+                            <input type="text" id="nameThird" name="nameThird" class="form-control" placeholder="Last name" >
+                            <small id="nameThirdHelp" class="form-text invalidError"></small>
+                        </div>
+                    </div>
+                    <small id="nameHelp" class="form-text invalidError"></small>
+                </div>
+                <div class="form-row form-group-style">
+                    <div class="col">
+                        <div class="form-group">
+                            <label  class="labelDsip" >SEX<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                            <div class="custom-control custom-radio  form-control" class="row">
+                                <div style="display: inline;padding: 0px 25px;" >
+                                    <input type="radio" id="radioSexMale" name="customRadioInline1" value="male" class="custom-control-input" style="padding: 20px;">
+                                    <label class="custom-control-label" for="radioSexMale">Male</label>
+                                </div >
+                                <div  style="display: inline;padding: 0px 25px;">
+                                    <input type="radio" id="radioSexFemale" name="customRadioInline1" value="female" class="custom-control-input">
+                                    <label class="custom-control-label" for="radioSexFemale">Female</label>
+                                </div >
+                                <div style="display: inline;padding: 0px 25px;">
+                                    <input type="radio" id="radioSexOther" name="customRadioInline1" value="other" class="custom-control-input">
+                                    <label class="custom-control-label" for="radioSexOther">Other</label>
+                                </div>
+                            </div>
+                            <small id="genderHelp" class="form-text invalidError"></small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="sic"  class="labelDsip">STUDENT ID NUMBER<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                            <input type="number" class="form-control" id="sic" placeholder="SIC" name="sic">
+                            <small id="sicHelp" class="form-text invalidError"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row form-group-style">
+                    <div class="form-group col">
+                        <label for="fatherName"  class="labelDsip">FATHER'S NAME<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                        <input type="text" name="fatherName" class="form-control" id="fatherName" placeholder="ENTER FULL NAME OF FATHER" onchange="validation_module.expose_father_name_val()">
+                        <small id="fatherNameHelp" class="form-text invalidError"></small>
+                    </div>
+                    <div class="form-group col">
+                        <label for="motherName"  class="labelDsip">MOTHER'S NAME<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                        <input type="text" class="form-control" name="motherName" id="motherName" placeholder="ENTER FULL NAME OF MOTHER" onchange="validation_module.expose_mother_name_val()">
+                        <small id="motherNameHelp" class="form-text invalidError"></small>
+                    </div>
+                </div>
+                <div class="form-row form-group-style">
+                    <div class="form-group col">
+                        <label for="dob"  class="labelDsip">DATE OF BIRTH<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                        <input type="date" class="form-control" id="dob" name="date" onchange="validation_module.expose_age_check()">
+                        <small id="dateHelp" class="form-text invalidError"></small>
+                    </div>
+                    <div class="form-group col">
+                        <label  class="labelDsip">HOBBIES<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                        <div class="form-row form-control" >
+                            <div class="custom-control custom-checkbox" style="padding-right: 40px;"> 
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="hobby" value="football" onchange="validation_module.expose_hobby_val()">
+                                <label class="custom-control-label" for="customCheck1">FootBall</label>
+                            </div>
+                            <div class="custom-control custom-checkbox" style="padding-right: 40px;">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2" name="hobby" value="cricket" onchange="validation_module.expose_hobby_val()">
+                                <label class="custom-control-label" for="customCheck2">Cricket</label>
+                            </div>
+                            <div class="custom-control custom-checkbox" style="padding-right: 40px;">
+                                <input type="checkbox" class="custom-control-input" id="customCheck3" name="hobby" value="basketball" onchange="validation_module.expose_hobby_val()">
+                                <label class="custom-control-label" for="customCheck3">OTHER</label>
+                            </div>
+                        </div>
+                        <small id="hobbyHelp" class="invalidError"></small>
+                    </div>
+                </div>
+                
+                <div class="form-group form-group-style">
+                    <label  class="labelDsip">CLASS X<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                    <div class="form-row">
+                        <div class="col">
+                            <select class="browser-default custom-select" name="classX" id="XBoard" onchange="validation_module.expose_X_board_val()">
+                                <option selected="selected" value="NONE" name="Xoptions">Select the Board</option>
+                                <option value="CBSE" name="Xoptions">CBSE</option>
+                                <option value="ICSE" name="Xoptions">ICSE</option>
+                                <option value="CHSE" name="Xoptions">CHSE</option>
+                            </select>
+                            <small id="classXHelp" class="invalidError"></small>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="XRoll" placeholder="ENTER CLASS X ROLL NUMBER" name="XRoll" onchange="validation_module.expose_X_roll_val()">
+                            <small id="XRollHelp" class="invalidError"></small>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="Xmarks" placeholder="Percentage(avoid '%' symbol)" name="XPerc" onchange="validation_module.expose_X_perc_val()">
+                            <small id="XPercHelp" class="invalidError"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-style">
+                    <label  class="labelDsip">CLASS XII<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                    <div class="form-row">
+                        <div class="col">
+                            <select class="browser-default custom-select" name="classXII" id="XIIBoard" onchange="validation_module.expose_XII_board_val()">
+                                <option selected="selected" value="NONE">Select the Board</option>
+                                <option value="CBSE">CBSE</option>
+                                <option value="ICSE">ICSE</option>
+                                <option value="CHSE">CHSE</option>
+                            </select>
+                            <small id="classXIIHelp" class="invalidError"></small>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="XIIRoll" placeholder="ENTER CLASS X ROLL NUMBER" name="XIIRoll" onchange="validation_module.expose_XII_roll_val()">
+                            <small id="XIIRollHelp" class="invalidError"></small>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="XIImarks" placeholder="Percentage(avoid '%' symbol)" name="XIIPerc" onchange="validation_module.expose_XII_perc_val()">
+                            <small id="XIIPercHelp" class="invalidError"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-style">
+                    <label for="statePlace" class="labelDsip">STATE AND DISTRICT<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                    <div class="form-row">
+                        <div class="col">
+                            <select class="browser-default custom-select" selected="selected" name="state" id="state" onchange="drop_down.expose_drop_down_list(); validation_module.expose_state_val()">
+                                <option value="NONE">Select your state</option>
+                                <option value="WEST BENGAL">WEST BENGAL</option>
+                                <option value="GUJRAT">GUJRAT</option>
+                                <option value="ODISHA">ODISHA</option>
+                                <option value="GOA">GOA</option>
+                            </select>
+                            <small id="stateHelp" class="invalidError"></small>
+                        </div>
+                        <div class="col"  class="labelDsip">
+                            <select name="subcategory" id="subcategory" class="browser-default custom-select" onchange="validation_module.expose_dist_val()" >
+                                <option value="NONE">-----</option>
+                            </select>
+                            <small id="districtHelp" class="invalidError"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label class="labelDsip">PHONE NUMBER<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                        <div class="form-row">
+                            <div class="col-md-2">
+                                <input type="number" style="padding-left: 0px;" class="form-control" id="phoneCountryCode" placeholder="  +91" disabled="disabled">
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" id="phoneNumber" placeholder="ENTER 10 DIGIT NUMBER" name="phone" onchange="validation_module.expose_phone_val()">
+                            </div>
+                        </div>
+                        <small id="phoneHelp" class="invalidError"></small>
+                        <div class="form-group col-md-11" style="padding-top: 20px; padding-left: 0px;padding-bottom: 0px;padding-right: 0px;">
+                            <label for="email" class="labelDsip">EMAIL<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                            <input type="text" class="form-control" id="email" placeholder="abc@example.com" name="email" onchange="validation_module.expose_email_val()">
+                            <small id="emailHelp" class="form-text invalidError"></small>
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <label for="address"  class="labelDsip">STREET NAME/HOUSE NO/PIN<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                        <textarea class="form-control" id="address" rows="5" name="presentAddress" style="overflow: hidden;" onchange="validation_module.expose_address_val()"></textarea>
+                        <small id="presentAddressHelp" class="invalidError"></small>
+                    </div>
+                </div>
+                <div class="mand-info">
+                    <i>* marked fields are mandatory</i>
+                </div>
+                <hr class="footer"/> 
+                <div class="submit-btn" id="button-replace">
+                    <input type="submit" class="btn btn-primary" id="submit_button" />
+                </div>
+            </form>  
+                
+            <table id="myTable" style="margin-left:auto;margin-right:auto;">
+            </table>       
+        </div>
+    </div>
+</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/custum.js"></script>
+    <script src = "js/student_module.js"></script>
+    <script src="boostrap/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

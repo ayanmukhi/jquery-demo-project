@@ -1,0 +1,95 @@
+.footer{
+    padding-top: 8px;
+    margin-top: 16px;
+    border-top: 4px dashed red;
+}
+.form-body {
+    border: 3px solid chocolate;
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    position: relative;
+}
+.form-group-style{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.form-heading{
+    text-align: center;
+    position: relative;
+    font-size: 33px;
+    line-height: 36px;
+    font-weight: 700;
+    font-family: cursive;
+    font-variant: all-petite-caps;
+    color: aquamarine;
+}
+.header {
+    background-color: rgb(173, 244, 255);
+    width: 100%;
+    height: 110px;
+
+}
+.headerTitle {
+    color: #161cc1;
+    position: absolute;
+    font-size: 44px;
+    font-weight: 700;
+    padding: 0px 30px;
+    line-height: 101px;
+}
+.headerImage {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 11%;
+    margin: 0px 10px;
+}
+input::placeholder { /* Chrome/Opera/Safari */
+    font-style: italic;
+}
+.invalidError{
+    color: red;
+}
+.italic-style {
+    font-style: italic;
+}
+.labelDsip {
+    font-weight: bold;
+    color: blanchedalmond;
+}
+.mand-info {
+    color: red;
+    margin-top: 36px;
+}
+
+.submit-btn {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+
+table {
+    width: 100%;
+    padding: 0px 2px;
+    border: 2px solid black;
+}
+td {
+    padding: 5px;
+    border: 2px solid black;
+    font-size: medium;
+    text-align: center;
+}
+.web-background{
+    background-color: grey;
+    padding-top: 40px;
+}
+
+#XBoard :first-child {
+    font-style: italic;
+}
