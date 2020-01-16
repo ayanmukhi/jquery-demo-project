@@ -1,10 +1,10 @@
 .footer{
     padding-top: 8px;
     margin-top: 16px;
-    border-top: 4px dashed red;
+    border-top: 4px dashed rgb(44, 43, 42);
 }
 .form-body {
-    border: 3px solid chocolate;
+    border: 20px solid rgb(44, 43, 42);
     margin-left: 8%;
     margin-right: 8%;
     margin-bottom: 20px;
@@ -13,6 +13,8 @@
     padding-bottom: 20px;
     padding-top: 5px;
     position: relative;
+    
+    background-color: rgb(161, 188, 143);
 }
 .form-group-style{
     padding-top: 10px;
@@ -26,16 +28,17 @@
     font-weight: 700;
     font-family: cursive;
     font-variant: all-petite-caps;
-    color: aquamarine;
+    color: rgb(0, 0, 0);
 }
 .header {
-    background-color: rgb(173, 244, 255);
+    /* background-color: rgb(255, 255, 255); */
     width: 100%;
     height: 110px;
+    background-image: linear-gradient(to bottom right, red, yellow);
 
 }
 .headerTitle {
-    color: #161cc1;
+    color: #000000;
     position: absolute;
     font-size: 44px;
     font-weight: 700;
@@ -60,7 +63,7 @@ input::placeholder { /* Chrome/Opera/Safari */
 }
 .labelDsip {
     font-weight: bold;
-    color: blanchedalmond;
+    color: rgb(0, 0, 0);
 }
 .mand-info {
     color: red;
