@@ -1,3 +1,7 @@
+.container {
+    max-width: 100%;
+    padding: 0px;
+}
 .footer{
     padding-top: 8px;
     margin-top: 16px;
@@ -14,7 +18,7 @@
     padding-top: 5px;
     position: relative;
     
-    background-color: rgb(161, 188, 143);
+    background-color: rgb(228, 177, 133);
 }
 .form-group-style{
     padding-top: 10px;
@@ -28,13 +32,13 @@
     font-weight: 700;
     font-family: cursive;
     font-variant: all-petite-caps;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 .header {
     /* background-color: rgb(255, 255, 255); */
     width: 100%;
     height: 110px;
-    background-image: linear-gradient(to bottom right, red, yellow);
+    background-image: linear-gradient(to bottom right, rgb(255, 0, 0), yellow);
 
 }
 .headerTitle {
@@ -78,18 +82,21 @@ input::placeholder { /* Chrome/Opera/Safari */
 
 
 table {
+    background-color: #f1efec;
     width: 100%;
     padding: 0px 2px;
-    border: 2px solid black;
+    border: 6px solid #ea0000;
+    margin-left:auto;
+    margin-right:auto;
 }
 td {
     padding: 5px;
-    border: 2px solid black;
+    border: 2px solid #ea0000;
     font-size: medium;
     text-align: center;
 }
 .web-background{
-    background-color: grey;
+    
     padding-top: 40px;
 }
 
