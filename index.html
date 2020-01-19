@@ -24,7 +24,7 @@
             <div class="form-heading">
                 REGISTRATION FORM
             </div>
-            <form class="form-body" onsubmit="return student_module.exposed_check_submit()" method="POST" id="form">
+            <form class="form-body" onsubmit="return stu_module.exposed_check_submit()" method="POST" id="form">
                 <div class="form-group form-group-style">
                     <label class="labelDsip">NAME<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
                     <div class="form-row">
@@ -127,7 +127,7 @@
                             <small id="XRollHelp" class="invalidError"></small>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" id="Xmarks" placeholder="Percentage(avoid '%' symbol)" name="XPerc" >
+                            <input type="number" class="form-control" id="Xmarks" placeholder="Percentage(avoid '%' symbol)" name="XPerc" >
                             <small id="XPercHelp" class="invalidError"></small>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                             <small id="XIIRollHelp" class="invalidError"></small>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" id="XIImarks" placeholder="Percentage(avoid '%' symbol)" name="XIIPerc" >
+                            <input type="number" class="form-control" id="XIImarks" placeholder="Percentage(avoid '%' symbol)" name="XIIPerc" >
                             <small id="XIIPercHelp" class="invalidError"></small>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                     <div class="col">
                         <label for="address"  class="labelDsip">STREET NAME/HOUSE NO/PIN<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
                         <textarea class="form-control" id="address" rows="5" name="presentAddress" style="overflow: hidden;" ></textarea>
-                        <small id="presentAddressHelp" class="invalidError"></small>
+                        <small id="addressHelp" class="invalidError"></small>
                     </div>
                 </div>
                 <div class="mand-info">
@@ -212,7 +212,6 @@
                 
             <table id="myTable">
                 <tbody>
-
                 </tbody>
             </table>       
         </div>
@@ -220,8 +219,14 @@
 </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/custum.js"></script>
-    <script src = "js/student_module.js"></script>
+    <script>
+        $(document).ready( function(){
+            stu_module.exposed_init();
+        });
+    </script>
+    <script src="js/new_student.js"></script>
+    <!-- <script src="js/custum.js"></script>
+    <script src = "js/student_module.js"></script> -->
     <script src="boostrap/js/bootstrap.min.js"></script>
 
   </body>

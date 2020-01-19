@@ -1,32 +1,9 @@
 var varTemp = 0;
 var student_module = ( function(){
-
-
-    var selected_gender;
-    var first;
-    var second = "";
-    var third;
-    var sic;
-    var fatherName;
-    var motherName;
-    var dob;
-    var hobbyStr;
-    var X_board;
-    var X_roll;
-    var X_perc;
-    var XII_board;
-    var XII_roll;
-    var XII_perc;
-    var dist;
-    var state;
-    var address;
-    var email;
-    var total_err = 0;
-    var address;
     var err_error_msg = [
         "INVALID FIRST NAME",
         "INVALID SECOND NAME",
-        "INVALID SECOND NAME",
+        "INVALID THIRD NAME",
         "INVALID SIC",
         "INVALID FATHER NAME",
         "INVALID MOTHER NAME",
@@ -75,32 +52,30 @@ var student_module = ( function(){
 
     var err = [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
     init = function() {
-        $("#dob").on("change", function(){age_check()});
-        $("#email").on("change", function(){email_val()});
-        $("#phoneNumber").on("change", function(){phone_val()});
+        $("#dob").on("keyup", function(){age_check()});
+        $("#email").on("keyup", function(){email_val()});
+        $("#phoneNumber").on("keyup", function(){phone_val()});
         $("#state").on("change", function(){drop_down_list()});
-        $("#nameFirst").on("change", function() {nameFirst()});
-        $("#nameSecond").on("change", function() {nameSecond()});
-        $("#nameThird").on("change", function() {nameThird()});
-        $("#sic").on("change", function() {sic_val()});
-        $("#fatherName").on("change", function() {father()});
-        $("#motherName").on("change", function() {mother()});
+        $("#nameFirst").on("keyup", function() {nameFirst()});
+        $("#nameSecond").on("keyup", function() {nameSecond()});
+        $("#nameThird").on("keyup", function() {nameThird()});
+        $("#sic").on("keyup", function() {sic_val()});
+        $("#fatherName").on("keyup", function() {father()});
+        $("#motherName").on("keyup", function() {mother()});
         $("input[name='hobby']").on("change", function(){hobby_val()});
         $("#XBoard").on("change", function() {X_Board_val()});
         $("#XIIBoard").on("change", function() {XII_Board_val()});
-        $("#XRoll").on("change", function() {X_roll_val()});
-        $("#XIIRoll").on("change", function() {XII_roll_val()});
-        $("#Xmarks").on("change", function() {X_perc_val()});
-        $("#XIImarks").on("change", function() {XII_perc_val()});
+        $("#XRoll").on("keyup", function() {X_roll_val()});
+        $("#XIIRoll").on("keyup", function() {XII_roll_val()});
+        $("#Xmarks").on("keyup", function() {X_perc_val()});
+        $("#XIImarks").on("keyup", function() {XII_perc_val()});
         $("#state").on("change", function(){state_val()});
         $("#subcategory").on("change", function(){dist_val()});
-        $("#address").on("change", function(){address_val()});
+        $("#address").on("keyup", function(){address_val()});
         $("input[name = 'customRadioInline1']").on("change", function(){check_gender()});
         //$("#del_btn").on("click", function(){deleteRow(this)});
         $("#reset_btn").on("click", function(){clear_fields()});
     };
-
-
 
 
     var check_gender = function() {
@@ -128,6 +103,7 @@ var student_module = ( function(){
 
     var count_error = function() {
         //alert("counting");
+        total_err = 0;
         for(i = 0 ; i <= 19 ; i++ ) {
             if( err[i] == 1 ){
                 err_help[i].html(err_error_msg[i]);
@@ -140,8 +116,8 @@ var student_module = ( function(){
 
 
     var check_submit =function() {
-        total_err = 0;
         count_error();
+        alert("TOTAL ERROR :"+total_err);
         if(total_err == 0){
             //alert("correct");
             createTable();
@@ -149,7 +125,7 @@ var student_module = ( function(){
             return false;
         }
         else {
-            alert("incorrect");
+            //alert("incorrect");
             return false;
         }
     };
@@ -158,7 +134,7 @@ var student_module = ( function(){
 
     var address_val = function() {
         address = $("#address").val();
-        address_help = $("#presentAddressHelp");
+        address_help = $("#addressHelp");
         if(/^[a-zA-Z0-9][a-zA-Z 0-9-,:(\\\n)\/\\]*$/.test(address) == false) {
             err[17] = 1;
             //err++;
@@ -362,6 +338,10 @@ var student_module = ( function(){
     };
     var clear_fields = function() {
         //alert("in cler");
+        for(i = 0 ; i <= 19 ; i++ ) {
+            err[i] = 1;
+        }
+        err[1] = 0;
         $("#nameFirst").val("");
         $("#nameSecond").val("");
         $("#nameThird").val("");
@@ -380,6 +360,28 @@ var student_module = ( function(){
         $("#XBoard").val("");
         $("#state").val("");
         $("#subcategory").val("");
+        
+
+        $("#nameFirstHelp").html("");
+        $("#nameSecondHelp").html("");
+        $("#nameThirdHelp").html("");
+        $("#genderHelp").html("")
+        $("#sicHelp").html("");
+        $("#fatherNameHelp").html("");
+        $("#motherNameHelp").html("");
+        $("#dateHelp").html("");
+        $("#hobbyHelp").html("");
+        $("#XRollHelp").html("");
+        $("#XPercHelp").html("");
+        $("#XIIRollHelp").html("");
+        $("#XIIPercHelp").html("");
+        $("#phoneHelp").html("");
+        $("#emailHelp").html("");
+        $("#presentAddressHelp").html("");
+        $("#classXIIHelp").html("");
+        $("#classXHelp").html("");
+        $("#stateHelp").html("");
+        $("#districtHelp").html("");
         var sex = $("input[name = 'customRadioInline1']");
         for( i  = 0 ; i < sex.length ; i++ ) {
             if( sex[i].checked ) {
@@ -393,7 +395,9 @@ var student_module = ( function(){
                 hobby[i].checked = false;
             }
         }
-        
+
+        $("#sic").prop("disabled", false);
+
     };
 
 
@@ -546,7 +550,11 @@ var student_module = ( function(){
     var sic_val = function () {
         sic = $("#sic").val();
         sicHelp = $("#sicHelp");
-        if( /^[1-9]$/.test(sic) == false ) {
+        if(check_sic(sic)) {
+            err[3] = 1;
+            sicHelp.html("SIC ALREADY EXISTS");
+        }
+        else if(/^[1-9]$/.test(sic) == false ){ 
             err[3] = 1;
             sicHelp.html("INVALID SIC");
         }
@@ -556,7 +564,21 @@ var student_module = ( function(){
         }
     };
 
-
+    var check_sic = function(check) {
+        //alert("duplicate checking :"+check);
+        var table = $("#myTable > tbody > tr");
+        //alert(table.length);
+        for( i = 1 ; i < table.length ; i++ ) {
+            //alert("for");
+            var sic = $("table > tbody > tr:eq(" + i + ")  > td:eq(2)").html();
+            //alert("SIC :"+  sic);
+            if( sic == check ) {
+                //alert("matched found");
+                return true;
+            }
+        }
+        return false;
+    };
 
     var createTable = function() {
         // //alert(nameFirst);
@@ -602,17 +624,19 @@ var student_module = ( function(){
 
 
     var edit_row = function(data) {
+        clear_fields();
         var count_space = 0;
-        var i = data.parentNode.parentNode.rowIndex;
-        var name = $("table > tbody > tr:eq(" + i + ")  > td:eq(0)").html();
-        //alert("VAL : " + rowData1);
-        alert("VAL :" + name);
+        var row = data.parentNode.parentNode.rowIndex;
+
+
+        var name = $("table > tbody > tr:eq(" + row + ")  > td:eq(0)").html();
         for( i = 0 ; i < name.length; i++ ) {
             if( name[i] == " ") {
                 count_space++;
             }
         }
-        alert(count_space);
+        //alert(name);
+
         var first ="";
         var second = "";
         var third = "";
@@ -658,207 +682,54 @@ var student_module = ( function(){
             $("#nameThird").val(third);
         }
         
-        alert(first);
-        alert(second);
-        alert(third);
         
+        var gender = $("table > tbody > tr:eq(" + row + ")  > td:eq(1)").html();
+        gender_options = $("input[name='customRadioInline1']");
+        for( i = 0 ; i < gender_options.length ; i++ ) {
+            if( gender_options[i].value == gender ) {
+                //alert(gender_options[i].value);
+                gender_options[i].checked = true;
+                break;
+            }
+        }
 
-        //alert("edit row");
+
+
+
+        var sic = $("table > tbody > tr:eq(" + row + ")  > td:eq(2)").html();
+        //alert(sic);
+        $("#sic").val(sic);
+        $("#sic").prop("disabled", true);
+       // $("#sic").prop('diasbled', true);
+        var fatherName = $("table > tbody > tr:eq(" + row + ")  > td:eq(3)").html();
+        //alert(fatherName);
+        $("#fatherName").val(fatherName);
         
-        //alert("row index : " + i);
-        // table = document.querySelector("#myTable").rows[i];
-        // varName = table.cells[0].innerHTML;
-        // varGender = table.cells[1].innerHTML;
-        // varSic = table.cells[2].innerHTML;
-        // varFather = table.cells[3].innerHTML;
-        // varMother = table.cells[4].innerHTML;
-        // varDate = table.cells[5].innerHTML;
-        // varHobby = table.cells[6].innerHTML;
-        // varClassX = table.cells[7].innerHTML;
-        // varClassXII = table.cells[8].innerHTML;
-        // varStateDist = table.cells[9].innerHTML;
-        // varPhone = table.cells[10].innerHTML;
-        // varStreet = table.cells[11].innerHTML;
-        // varEmail = table.cells[12].innerHTML;
-    
-        // varStart = 0;
-        // varEnd = varName.length;
-        // varFirstName = "";
-        // varMidName = "";
-        // varLastName = "";
- 
-        // for ( i = varStart ; i < varEnd ; i++) {
-        //     if( varName[i] == " ") {
-        //         break;
-        //     }
-        //     varFirstName += varName[i];
-        // }
-        // varStart = i;
-        // for ( j = varStart + 1 ; j < varEnd ; j++) {
-        //     if( varName[j] == " ") {
-        //         break;
-        //     }
-        //     varMidName += varName[j];
-        // }
-        // varStart = j;
-        // for ( k = varStart + 1 ; k < varEnd ; k++) {
-        //     varLastName += varName[k];
-        // }
+        var motherName = $("table > tbody > tr:eq(" + row + ")  > td:eq(4)").html();
+        //alert(motherName);
+        $("#motherName").val(motherName);
+
+        var dob = $("table > tbody > tr:eq(" + row + ")  > td:eq(5)").html();
+       // alert(dob);
+        $("#dob").val(dob);
+
+        var phone = $("table > tbody > tr:eq(" + row + ")  > td:eq(10)").html();
+        //alert(phone);
+        $("#phoneNumber").val(phone);
+
+        var street_address = $("table > tbody > tr:eq(" + row + ")  > td:eq(11)").html();
+        //alert(street_address);
+        $("#address").val(street_address);
+
+        var email = $("table > tbody > tr:eq(" + row + ")  > td:eq(12)").html();
+        //alert(email);
+        $("#email").val(email);
+        //var hobbies = $("table > tbody > tr:eq(" + i + ")  > td:eq(6)").html();
+        // var matriculation = $("table > tbody > tr:eq(" + i + ")  > td:eq(7)").html();
+        // var intermediate = $("table > tbody > tr:eq(" + i + ")  > td:eq(8)").html();
+        // var dist_state = $("table > tbody > tr:eq(" + i + ")  > td:eq(9)").html();
         
-        // genderOptions = document.getElementsByName("customRadioInline1");
-        // for( i = 0 ; i < genderOptions.length ; i++ ) {
-        //     if( genderOptions[i].value == varGender) {
-        //         genderOptions[i].checked = "checked";
-        //         //alert("checked");
-        //         break;
-        //     }
-        // }
-        // var hobbyIndex = 0;
-        // var hobbySelected = [];
-        // hobbySelected[0] = "";
-        // //alert("hoby string : " + varHobby);    
-        // for ( i = 0 ; i < varHobby.length ; i++ ) {
-        //     if ( varHobby[i] == " ") {
-        //         hobbyIndex++;
-        //         hobbySelected[hobbyIndex] = "";
-    
-        //     }
-        //     else {
-        //         hobbySelected[hobbyIndex] += varHobby[i];
-        //     }
-        // }
-        // //alert("selected hobby parsed : " + hobbySelected[1]);
-        // hobbyIndex = 1;
-        // hobbiesOptions = document.getElementsByName("hobby");
-        // //alert(hobbiesOptions[1]);
-        // for ( i = 0 ; i < hobbiesOptions.length ; i++ ) {
-        //     if( hobbiesOptions[i].value == hobbySelected[hobbyIndex] ) {
-        //         hobbyIndex++;
-        //         hobbiesOptions[i].checked = true;
-        //         //alert("checked " + hobbyIndex);
-        //     }
-        //     else {
-        //        // alert("unchecked " + hobbyIndex);
-        //         hobbiesOptions[i].checked = false;
-        //     }
-        // }
-        // var XBoard = "";
-        // var XRoll = "";
-        // var XPerc = "";
-        // pos = 0;
-        // for ( i = 0 ; i < varClassX.length ; i++ ) {
-        //     if( varClassX[i] == ",") {
-        //         break;
-        //     }
-        //     XBoard += varClassX[i];
-        //     pos = i;
-        // }
-        // //alert("board : " + XBoard);
-        // //alert(document.querySelector("#XBoard").options.length);
-        // for(  i = 0 ; i < document.querySelector("#XBoard").options.length ; i++ ){
-        //     if( document.querySelector("#XBoard").options[i].value == XBoard ) {
-        //         //alert("selected");
-        //         document.querySelector("#XBoard").options[i].selected = true;
-        //         break;
-        //     }
-        // }
-        // //alert("X : " + i);
-        // for( j = pos + 8 ; j < varClassX.length ; j++ ) {
-        //     if( varClassX[j] == "," ) {
-        //         break;
-        //     }
-        //     XRoll += varClassX[j];
-        //     pos = j;
-        // }
         
-        // for ( k = pos + 11 ; k < varClassX.length ; k++ ) {
-        //     if( varClassX[k] == ":") {
-        //         break;
-        //     }
-        //     XPerc += varClassX[k];
-        // }
-        // var XIIBoard = "";
-        // var XIIRoll = "";
-        // var XIIPerc = "";
-        // posj = 0;
-        // for ( i = 0 ; i < varClassXII.length ; i++ ) {
-        //     if( varClassXII[i] == ",") {
-        //         break;
-        //     }
-        //     XIIBoard += varClassXII[i];
-        //     posj = i;
-        // }
-        // for(  i = 0 ; i < document.querySelector("#XIIBoard").options.length ; i++ ){
-        //     if( document.querySelector("#XIIBoard").options[i].value == XIIBoard ) {
-        //         //alert("selected");
-        //         document.querySelector("#XIIBoard").options[i].selected = true;
-        //         break;
-        //     }
-        // }
-        // //alert("XII : " + i);
-        // for( j = posj + 8 ; j < varClassXII.length ; j++ ) {
-        //     if( varClassXII[j] == "," ) {
-        //         break;
-        //     }
-        //     posj = j;
-        //     XIIRoll += varClassXII[j];
-        // }
-        // for ( k = posj + 11 ; k < varClassXII.length ; k++ ) {
-        //     if( varClassXII[k] == ":") {
-        //         break;
-        //     }
-        //     XIIPerc += varClassXII[k];
-        // }
-        // flag = 0;
-        // varState = "";
-        // varDist = "";
-        // //alert(varStateDist);
-        // for( i = 0 ; i < varStateDist.length ; i++ ) {
-        //     if( varStateDist[i] != "," ) {
-        //         if( flag == 0 ) {
-        //             varDist += varStateDist[i];
-        //         }
-        //         else {
-        //             varState += varStateDist[i];
-        //         }
-        //     }
-        //     else {
-        //         i++;
-        //         flag = 1;
-        //     }
-        // }
-        // //alert(varState);
-        // //alert(document.querySelector("#state").options.length);
-        // for(  i = 0 ; i < document.querySelector("#state").options.length ; i++ ){
-        //     if( document.querySelector("#state").options[i].value == varState ) {
-        //         //alert("selected");
-        //         document.querySelector("#state").options[i].selected = true;
-        //         break;
-        //     }
-        // }
-        // for(  i = 0 ; i < document.querySelector("#subcategory").options.length ; i++ ){
-        //     if( document.querySelector("#subcategory").options[i].value == varDist ) {
-        //         //alert("selected");
-        //         document.querySelector("#subcategory").options[i].selected = true;
-        //         break;
-        //     }
-        // }
-    
-        // document.querySelector("#nameFirst").value = varFirstName;
-        // document.querySelector("#nameSecond").value = varMidName;
-        // document.querySelector("#nameThird").value = varLastName;
-        // document.querySelector("#sic").value = varSic;
-        // document.querySelector("#sic").disabled = true;
-        // document.querySelector("#fatherName").value = varFather;
-        // document.querySelector("#motherName").value = varMother;
-        // document.querySelector("#dob").value = varDate;
-        // document.querySelector("#XRoll").value = XRoll;
-        // document.querySelector("#Xmarks").value = XPerc;
-        // document.querySelector("#XIIRoll").value = XIIRoll;
-        // document.querySelector("#XIImarks").value = XIIPerc;
-        // document.querySelector("#phoneNumber").value = varPhone;
-        // document.querySelector("#email").value = varEmail;
-        // document.querySelector("#address").value = varStreet;
         // document.getElementById("button-replace").innerHTML = "<button type=\"button\" id= \"update_btn\" class=\"btn btn-secondary\" onclick=\"return update_val.expose_fields()\" style=\"background-color: rgb(218, 204, 59);\" >UPDATE</button>";
     };
 
