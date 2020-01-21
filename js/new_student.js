@@ -187,13 +187,13 @@ var stu_module = ( function() {
         address_val();
         alert("TOTAL ERROR :" + total_err);
         if(total_err == 0){
-            alert("correct");
+           // alert("correct");
             createTable();
             clear_fields();
             return false;
         }
         else {
-            alert("incorrect");
+            //alert("incorrect");
             return false;
         }
     };
@@ -257,7 +257,7 @@ var stu_module = ( function() {
         state_help.html("");
         dist_help.html("");
         sic.prop("disabled", false);
-
+        $("#button-replace").html("<input type=\"submit\" class=\"btn btn-primary\" id=\"submit_button\" />")
     };
 
     //function to validate address field
@@ -595,7 +595,7 @@ var stu_module = ( function() {
             nameStr = first.val() + " " + second.val() + " " + third.val();
         }
         var table = $("#myTable > tbody");
-        str = "<tr><td>" + nameStr + "</td><td>" + selected_gender + "</td><td>" + sic.val() + "</td><td>" + fatherName.val() + "</td><td>" + motherName.val() + "</td><td>" + dob.val() + "</td><td>" + hobbyStr + "</td><td>" + X_board.val() + ", ROLL:" + X_roll.val() + ", Secured:" + X_perc.val() + "</td><td>" + XII_board.val() + ", ROLL:" + XII_roll.val() + ", Secured:" + XII_perc.val() + "</td><td>" + dist.val() + ", " + state.val() + "</td><td>" + phone.val() + "</td><td>" + address.val() + "</td><td>" + email.val() + "</td><td><input type=\"button\" id=\"del_btn\" value=\"Delete\" onclick=\"stu_module.exposed_deleteRow(this.parentNode.parentNode.rowIndex)\"/> \/<br> <input type=\"button\" value=\"EDIT\" onclick=\"stu_module.expose_edit_row(this)\"/></td></tr>";
+        str = "<tr><td>" + nameStr + "</td><td>" + selected_gender + "</td><td>" + sic.val() + "</td><td>" + fatherName.val() + "</td><td>" + motherName.val() + "</td><td>" + dob.val() + "</td><td>" + hobbyStr + "</td><td>" + X_board.val() + ", ROLL:" + X_roll.val() + ", Secured:" + X_perc.val() + "</td><td>" + XII_board.val() + ", ROLL:" + XII_roll.val() + ", Secured:" + XII_perc.val() + "</td><td>" + dist.val() + ", " + state.val() + "</td><td>" + phone.val() + "</td><td>" + address.val() + "</td><td>" + email.val() + "</td><td><input type=\"button\" id=\"del_btn\" value=\"Delete\" onclick=\"stu_module.exposed_deleteRow(this.parentNode.parentNode.rowIndex)\"/> \/<br> <input type=\"button\" value=\"EDIT\" onclick=\"stu_module.exposed_edit_row(this)\"/></td></tr>";
         table.append(str);
     
     };
@@ -609,16 +609,348 @@ var stu_module = ( function() {
         str = "<tr><td>NAME</td><td>GENDER</td><td>SIC</td><td>FATHER NAME</td><td>MOTHER NAME</td><td>DOB</td><td>HOBBIES</td><td>MATRICULATION</td><td>INTERMEDIATE</td><td>DIST AND STATE</td><td>PHONE</td><td>STREET ADDRESS</td><td>EMAIL</td><td>ACTION</td></tr>";
         table.append(str);
     };
+    var edit_row = function(data) {
+        clear_fields();
+        var count_space = 0;
+        var row = data.parentNode.parentNode.rowIndex;
+
+
+        var nameStr = $("table > tbody > tr:eq(" + row + ")  > td:eq(0)").html();
+        for( i = 0 ; i < nameStr.length; i++ ) {
+            if( nameStr[i] == " ") {
+                count_space++;
+            }
+        }
+        //alert(name);
+
+        var first_name ="";
+        var second_name = "";
+        var third_name = "";
+        if( count_space == 2) {
+            
+            var flag = 0;
+            for( i = 0 ; i < nameStr.length; i++ ) {
+                if(nameStr[i] != " "){
+                    if( flag == 0 ) {
+                        first_name += nameStr[i];
+                    }
+                    else if( flag == 1 ){
+                        second_name += nameStr[i];
+                    }
+                    else {
+                        third_name += nameStr[i];
+                    }
+                }
+                else {
+                    flag++;
+                }
+            }
+            first.val(first_name);
+            second.val(second_name);
+            third.val(third_name);
+        }
+        else {
+            var flag = 0;
+            for( i = 0 ; i < nameStr.length; i++ ) {
+                if(nameStr[i] != " "){
+                    if( flag == 0 ) {
+                        first_name += nameStr[i];
+                    }
+                    else {
+                        third_name += nameStr[i];
+                    }
+                }
+                else {
+                    flag++;
+                }
+            }
+            first.val(first_name);
+            third.val(third_name);
+        }
+        
+        
+        var gender = $("table > tbody > tr:eq(" + row + ")  > td:eq(1)").html();
+        gender_options = $("input[name='customRadioInline1']");
+        for( i = 0 ; i < gender_options.length ; i++ ) {
+            if( gender_options[i].value == gender ) {
+                //alert(gender_options[i].value);
+                gender_options[i].checked = true;
+                break;
+            }
+        }
 
 
 
+
+        var sic = $("table > tbody > tr:eq(" + row + ")  > td:eq(2)").html();
+        //alert(sic);
+        $("#sic").val(sic);
+        $("#sic").prop("disabled", true);
+       // $("#sic").prop('diasbled', true);
+        var fatherName = $("table > tbody > tr:eq(" + row + ")  > td:eq(3)").html();
+        //alert(fatherName);
+        $("#fatherName").val(fatherName);
+        
+        var motherName = $("table > tbody > tr:eq(" + row + ")  > td:eq(4)").html();
+        //alert(motherName);
+        $("#motherName").val(motherName);
+
+        var dob = $("table > tbody > tr:eq(" + row + ")  > td:eq(5)").html();
+       // alert(dob);
+        $("#dob").val(dob);
+
+        var phone = $("table > tbody > tr:eq(" + row + ")  > td:eq(10)").html();
+        //alert(phone);
+        $("#phoneNumber").val(phone);
+
+        var street_address = $("table > tbody > tr:eq(" + row + ")  > td:eq(11)").html();
+        //alert(street_address);
+        $("#address").val(street_address);
+
+        var email = $("table > tbody > tr:eq(" + row + ")  > td:eq(12)").html();
+        //alert(email);
+        $("#email").val(email);
+
+
+        var hobbyTable = $("table > tbody > tr:eq(" + row + ")  > td:eq(6)").html();
+        var hobbyIndex = 0;
+        var hobbySelected = [];
+        hobbySelected[0] = "";
+
+        for ( i = 0 ; i < hobbyTable.length ; i++ ) {
+            if ( hobbyTable[i] == " ") {
+                hobbyIndex++;
+                hobbySelected[hobbyIndex] = "";
+                //alert("parsing :" + hobbySelected[hobbyIndex -1 ]);
+            }
+            else {
+                hobbySelected[hobbyIndex] += hobbyTable[i];
+            }
+        }
+
+        hobbyIndex = 0;
+        // alert(hobbies[0].value);
+        //hobbiesOptions = document.getElementsByName("hobby");
+        for ( i = 0 ; i < hobbies.length ; i++ ) {
+           // alert("checking : "+ hobbies[i].value);
+            if( hobbies[i].value == hobbySelected[hobbyIndex] ) {
+                hobbyIndex++;
+                //alert(hobbies[i]);
+                hobbies[i].checked = true;
+            }
+            else {
+                //alert("false");
+                hobbies[i].checked = false;
+            }
+        }
+        
+        var matriculation = $("table > tbody > tr:eq(" + row + ")  > td:eq(7)").html();
+        var XBoard = "";
+        var XRoll = "";
+        var XPerc = "";
+        pos = 0;
+        for ( i = 0 ; i < matriculation.length ; i++ ) {
+            if( matriculation[i] == ",") {
+                break;
+            }
+            XBoard += matriculation[i];
+            pos = i;
+        }
+        
+        
+        XOptions = $("option[name='Xoptions']");
+        //alert("LENGTH"+XOptions.length);
+        //alert(XOptions[0].value);
+        for(  i = 0 ; i < XOptions.length ; i++ ){
+            if( XOptions[i].value == XBoard ) {
+                //alert("selected");
+                XOptions[i].selected = true;
+                break;
+            }
+        }
+        //alert("X : " + i);
+        for( j = pos + 8 ; j < matriculation.length ; j++ ) {
+            if( matriculation[j] == "," ) {
+                break;
+            }
+            XRoll += matriculation[j];
+            pos = j;
+        }
+        //alert(XRoll);
+        X_roll.val(XRoll);
+
+
+        for ( k = pos + 11 ; k < matriculation.length ; k++ ) {
+            if( matriculation[k] == ":") {
+                break;
+            }
+            XPerc += matriculation[k];
+        }
+       // alert(XPerc);
+        X_perc.val(XPerc);
+
+
+
+        var intermediate = $("table > tbody > tr:eq(" + row + ")  > td:eq(8)").html();
+        var XIIBoard = "";
+        var XIIRoll = "";
+        var XIIPerc = "";
+        posj = 0;
+        for ( i = 0 ; i < intermediate.length ; i++ ) {
+            if( intermediate[i] == ",") {
+                break;
+            }
+            XIIBoard += intermediate[i];
+            posj = i;
+        }
+        XIIOptions = $("option[name='XIIoptions']");
+        for(  i = 0 ; i < XIIOptions.length ; i++ ){
+            if( XIIOptions[i].value == XIIBoard ) {
+                XIIOptions[i].selected = true;
+                break;
+            }
+        }
+        //alert("XII : " + i);
+        for( j = posj + 8 ; j < intermediate.length ; j++ ) {
+            if( intermediate[j] == "," ) {
+                break;
+            }
+            posj = j;
+            XIIRoll += intermediate[j];
+        }
+        XII_roll.val(XRoll);
+        for ( k = posj + 11 ; k < intermediate.length ; k++ ) {
+            if( intermediate[k] == ":") {
+                break;
+            }
+            XIIPerc += intermediate[k];
+        }
+        XII_perc.val(XIIPerc);
+        
+        
+        var dist_state = $("table > tbody > tr:eq(" + row + ")  > td:eq(9)").html();
+        flag = 0;
+        varState = "";
+        varDist = "";
+        //alert(varStateDist);
+        for( i = 0 ; i < dist_state.length ; i++ ) {
+            if( dist_state[i] != "," ) {
+                if( flag == 0 ) {
+                    varDist += dist_state[i];
+                }
+                else {
+                    varState += dist_state[i];
+                }
+            }
+            else {
+                i++;
+                flag = 1;
+            }
+        }
+        //alert("state:"+varState);
+        //alert("dist"+varDist);
+        stateOptions = $("#state option");
+        for(  i = 0 ; i < stateOptions.length ; i++ ){
+            if( stateOptions[i].value == varState ) {
+                stateOptions[i].selected = true;
+                break;
+            }
+        }
+        distOptions = $("#subcategory option");
+        for(  i = 0 ; i < distOptions.length ; i++ ){
+            if( distOptions[i].value == varDist ) {
+                distOptions[i].selected = true;
+                break;
+            }
+        }
+        
+        $("#button-replace").html("<button type=\"button\" id= \"update_btn\" class=\"btn btn-secondary\" onclick=\"return stu_module.expose_update_fields("+row+")\" style=\"background-color: rgb(218, 204, 59);\" >UPDATE</button>");
+    };
+
+    var update_fields = function(data) {
+        
+        //alert("UPDATE TO : "+ data);
+        check_gender();
+        //sic_val();
+        nameThird();
+        nameFirst();
+        nameSecond();
+        mother();
+        father();
+        hobby_val();
+        XII_Board_val();
+        X_Board_val();
+        XII_roll_val();
+        X_roll_val();
+        X_perc_val();
+        XII_perc_val();
+        state_val();
+        dist_val();
+        phone_val();
+        email_val();
+        age_check();
+        address_val();
+        err[4] = 0;
+        err[3] = 0;
+        count_error();
+        //alert("TOTAL ERROR :" + total_err);
+        if(total_err == 0){
+            //alert("correct");
+            update_record(data);
+            clear_fields();
+            return false;
+        }
+        else {
+            //alert("incorrect");
+            return false;
+        }
+    }
+    var update_record = function(row) {
+        //alert("row unmbre :"+row);
+        var nameStr = "";
+        if( second.val() == "" ) {
+            nameStr = first.val() + " " + third.val();
+        }
+        else{
+            nameStr = first.val() + " " + second.val() + " " + third.val();
+        }
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(0)").html(nameStr);
+
+        for( i = 0 ; i < gender_options.length; i++ ) {
+            if( gender_options[i].checked) {
+                $("table > tbody > tr:eq(" + row + ")  > td:eq(1)").html(gender_options[i].value);
+                break;
+            }
+        }
+       // $("table > tbody > tr:eq(" + row + ")  > td:eq(2)").html(sic.val(ue));
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(3)").html(fatherName.val());
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(4)").html(motherName.val());
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(5)").html(dob.val());
+        hobbyStr = "";
+        for ( i = 0 ; i < hobbies.length ; i++ ) {
+            if( hobbies[i].checked ){
+                hobbyStr += " " + hobbies[i].value;
+            }
+        }
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(6)").html(hobbyStr);
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(7)").html(X_board.val() + ", ROLL:" + X_roll.val() + ", Secured:" + X_perc.val());
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(8)").html(XII_board.val() + ", ROLL:" + XII_roll.val() + ", Secured:" + XII_perc.val());
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(9)").html(dist.val() + ", " + state.val());
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(10)").html(phone.val());
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(11)").html(address.val());
+        $("table > tbody > tr:eq(" + row + ")  > td:eq(12)").html(email.val());
+
+
+    }
 
 
 
     //making var/objects public
     return {
         exposed_deleteRow : deleteRow,
+        exposed_edit_row : edit_row,
         exposed_init : init,
         exposed_check_submit : check_submit,
+        expose_update_fields : update_fields,
     }
 })();

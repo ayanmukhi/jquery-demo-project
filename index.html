@@ -137,10 +137,10 @@
                     <div class="form-row">
                         <div class="col">
                             <select class="browser-default custom-select" name="classXII" id="XIIBoard" >
-                                <option selected="selected" value="NONE">Select the Board</option>
-                                <option value="CBSE">CBSE</option>
-                                <option value="ICSE">ICSE</option>
-                                <option value="CHSE">CHSE</option>
+                                <option selected="selected" value="NONE" name="XIIoptions">Select the Board</option>
+                                <option value="CBSE" name="XIIoptions">CBSE</option>
+                                <option value="ICSE" name="XIIoptions">ICSE</option>
+                                <option value="CHSE" name="XIIoptions">CHSE</option>
                             </select>
                             <small id="classXIIHelp" class="invalidError"></small>
                         </div>
@@ -204,8 +204,10 @@
                     <i>* marked fields are mandatory</i>
                 </div>
                 <hr class="footer"/> 
-                <div class="submit-btn" id="button-replace">
-                    <input type="submit" class="btn btn-primary" id="submit_button" />
+                <div class="submit-btn" >
+                    <span id="button-replace">
+                        <input type="submit" class="btn btn-primary" id="submit_button" />
+                    </span>
                     <input type="button" class="btn btn-secondary" id="reset_btn" value="RESET">
                 </div>
             </form>  
