@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -47,7 +48,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label  class="labelDsip" >SEX<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
-                            <div class="custom-control custom-radio  form-control" class="row">
+                            <div class="form-row custom-radio  form-control" style="height: max-content;">
                                 <div style="display: inline;padding: 0px 25px;" >
                                     <input type="radio" id="radioSexMale" name="customRadioInline1" value="male" class="custom-control-input" style="padding: 20px;">
                                     <label class="custom-control-label" for="radioSexMale">Male</label>
@@ -66,9 +67,9 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="sic"  class="labelDsip">STUDENT ID NUMBER<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
-                            <input type="number" class="form-control" id="sic" placeholder="SIC" name="sic">
-                            <small id="sicHelp" class="form-text invalidError"></small>
+                            <label for="email" class="labelDsip">EMAIL<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
+                            <input type="text" class="form-control" id="email" placeholder="abc@example.com" name="email" >
+                            <small id="emailHelp" class="form-text invalidError"></small>
                         </div>
                     </div>
                 </div>
@@ -92,7 +93,7 @@
                     </div>
                     <div class="form-group col">
                         <label  class="labelDsip">HOBBIES<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
-                        <div class="form-row form-control" >
+                        <div class="form-row form-control" style="height: max-content;" >
                             <div class="custom-control custom-checkbox" style="padding-right: 40px;"> 
                                 <input type="checkbox" class="custom-control-input" id="customCheck1" name="hobby" value="football" >
                                 <label class="custom-control-label" for="customCheck1">FootBall</label>
@@ -187,11 +188,11 @@
                             </div>
                         </div>
                         <small id="phoneHelp" class="invalidError"></small>
-                        <div class="form-group col-md-11" style="padding-top: 20px; padding-left: 0px;padding-bottom: 0px;padding-right: 0px;">
+                        <!-- <div class="form-group col-md-11" style="padding-top: 20px; padding-left: 0px;padding-bottom: 0px;padding-right: 0px;">
                             <label for="email" class="labelDsip">EMAIL<i style="color: rgba(255, 0, 0, 0.747);"> *</i></label>
                             <input type="text" class="form-control" id="email" placeholder="abc@example.com" name="email" >
                             <small id="emailHelp" class="form-text invalidError"></small>
-                        </div>
+                        </div> -->
                     </div>
                     
                     <div class="col">
@@ -200,22 +201,27 @@
                         <small id="addressHelp" class="invalidError"></small>
                     </div>
                 </div>
-                <div class="mand-info">
-                    <i>* marked fields are mandatory</i>
+                <div class="row">
+                    <div class="mand-info col-md-6">
+                        <i>* marked fields are mandatory</i>
+                    </div>
+                    <div class="registraiton-info col-md-6" id="invalid_input_data">
+                    </div>
                 </div>
                 <hr class="footer"/> 
                 <div class="submit-btn" >
                     <span id="button-replace">
-                        <input type="submit" class="btn btn-primary" id="submit_button" />
+                        <input type="submit" class="btn btn-primary" id="submit_button" value="REGISTRATION"/>
                     </span>
                     <input type="button" class="btn btn-secondary" id="reset_btn" value="RESET">
                 </div>
             </form>  
-                
-            <table id="myTable">
-                <tbody>
-                </tbody>
-            </table>       
+            <div class="table-responsive">
+                <table id="myTable" class="table" style="margin-bottom: 0rem;">
+                    <tbody>
+                    </tbody>
+                </table>     
+            </div>     
         </div>
     </div>
 </div>
@@ -223,6 +229,21 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script>
         $(document).ready( function(){
+            $.ajax({
+                method : "GET",
+                headers : {'Access-Control-Allow-Origin':'http://localhost/json/resources.json'},
+                url : "http://localhost/json/resources.json",
+                // crossDomain : true,
+                // dataType : 'json',
+                success : function( result) {
+                    stu_module.exposed_createTableHead();
+                    var table = $("#myTable > tbody");
+                    for( var i in result) {
+                        str = "<tr><td>" + result[i].name + "</td><td>" + result[i].gender + "</td><td>" + result[i].sic + "</td><td>" + result[i].fatherName + "</td><td>" + result[i].motherName + "</td><td>" + result[i].dob + "</td><td>" + result[i].hobby + "</td><td>" + result[i].matric +  "</td><td>" + result[i].intermediate + "</td><td>" + result[i].dist_state + "</td><td>" + result[i].phone + "</td><td>" + result[i].address + "</td><td>" + result[i].email + "</td><td><input type=\"button\" id=\"del_btn\" value=\"Delete\" onclick=\"stu_module.exposed_deleteRow(this.parentNode.parentNode.rowIndex)\"/> \/<br> <input type=\"button\" value=\"EDIT\" onclick=\"stu_module.exposed_edit_row(this)\"/></td></tr>";
+                        table.append(str);
+                    }
+                }
+            });
             stu_module.exposed_init();
         });
     </script>

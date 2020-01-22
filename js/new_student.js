@@ -9,8 +9,8 @@ var stu_module = ( function() {
     var second_help;
     var third;
     var third_help;
-    var sic;
-    var sic_help;
+    var sic = 0;
+    //var sic_help;
     var fatherName;
     var father_help;
     var motherName;
@@ -44,12 +44,13 @@ var stu_module = ( function() {
     var email_help;
     var phone;
     var phone_help;
+    var incorrect;
 
 
     init = function(){
 
         //initialisong varriables
-        err = [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+        err = [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
         selected_gender = "";
         gender_help = $("#genderHelp");
         first = $("#nameFirst");
@@ -58,8 +59,7 @@ var stu_module = ( function() {
         second_help = $("#nameSecondHelp");
         third = $("#nameThird");
         third_help = $("#nameThirdHelp");
-        sic = $("#sic");
-        sic_help = $("#sicHelp");
+        //sic_help = $("#sicHelp");
         fatherName = $("#fatherName");
         father_help = $("#fatherNameHelp");
         motherName = $("#motherName");
@@ -94,17 +94,21 @@ var stu_module = ( function() {
         gender_options = $("input[name = 'customRadioInline1']");
         del = $("#del_btn");
         reset = $("#reset_btn");
+        incorrect = $("#invalid_input_data");
 
 
         //invoking event listeners functions
         dob.on("keyup", function(){age_check()});
+        dob.on("change", function(){age_check()});
         email.on("keyup", function(){email_val()});
+        email.on("change", function(){email_val()});
         phone.on("keyup", function(){phone_val()});
+        phone.on("change", function(){phone_val()});
         state.on("change", function(){drop_down_list()});
         first.on("keyup", function() {nameFirst()});
         second.on("keyup", function() {nameSecond()});
         third.on("keyup", function() {nameThird()});
-        sic.on("keyup", function() {sic_val()});
+        //sic.on("keyup", function() {sic_val()});
         fatherName.on("keyup", function() {father()});
         motherName.on("keyup", function() {mother()});
         hobbies.on("change", function(){hobby_val()});
@@ -113,18 +117,21 @@ var stu_module = ( function() {
         X_roll.on("keyup", function() {X_roll_val()});
         XII_roll.on("keyup", function() {XII_roll_val()});
         X_perc.on("keyup", function() {X_perc_val()});
+        X_perc.on("change", function() {X_perc_val()});
         XII_perc.on("keyup", function() {XII_perc_val()});
+        XII_perc.on("change", function() {XII_perc_val()});
         state.on("change", function(){state_val()});
         dist.on("change", function(){dist_val()});
         address.on("keyup", function(){address_val()});
         gender_options.on("change", function(){check_gender()});
-        del.on("click", function(){deleteRow(this)});
+        //del.on("click", function(){deleteRow(this)});
         $("#reset_btn").on("click", function(){clear_fields()});
     };
 
 
     //function for deleting a row 
     var deleteRow = function(r) {
+        //sic--;
         var res = confirm("press OK to proceed for deletion !!");
         if (res == true) {
             $("table tr:eq(" + r + ")").remove();
@@ -156,17 +163,19 @@ var stu_module = ( function() {
         total_err = 0;
         for(i = 0 ; i <= 19 ; i++ ) {
             if( err[i] == 1 ){
+                //alert(i);
                 //err_help[i].html(err_error_msg[i]);
                 total_err += 1;
             } 
         }
+        //alert("total error : " + total_err);
     };
 
     //function to submit data upon correct validation
     var check_submit =function() {
         count_error();
         check_gender();
-        sic_val();
+        //sic_val();
         nameThird();
         nameFirst();
         nameSecond();
@@ -185,15 +194,18 @@ var stu_module = ( function() {
         email_val();
         age_check();
         address_val();
-        alert("TOTAL ERROR :" + total_err);
+        //alert("TOTAL ERROR :" + total_err);
         if(total_err == 0){
-           // alert("correct");
+            //alert("correct");
             createTable();
             clear_fields();
+            incorrect.html("REGISTRATION SUCCESSFUL");
+            incorrect.css("color", "green");
             return false;
         }
         else {
-            //alert("incorrect");
+            incorrect.html("REGISTRATION FAILED INAPPROPRIATE DATA");
+            incorrect.css("color", "red");
             return false;
         }
     };
@@ -204,11 +216,13 @@ var stu_module = ( function() {
         for(i = 0 ; i <= 19 ; i++ ) {
             err[i] = 1;
         }
+        incorrect.html("");
         err[1] = 0;
+        err[3] = 0;
         first.val("");
         second.val("");
         third.val("");
-        sic.val("");
+        //sic.val("");
         fatherName.val("");
         motherName.val("");
         dob.val("");
@@ -240,7 +254,7 @@ var stu_module = ( function() {
         second_help.html("");
         third_help.html("");
         gender_help.html("")
-        sic_help.html("");
+        //sic_help.html("");
         father_help.html("");
         mother_help.html("");
         date_help.html("");
@@ -256,8 +270,8 @@ var stu_module = ( function() {
         address_help.html("");
         state_help.html("");
         dist_help.html("");
-        sic.prop("disabled", false);
-        $("#button-replace").html("<input type=\"submit\" class=\"btn btn-primary\" id=\"submit_button\" />")
+        //sic.prop("disabled", false);
+        $("#button-replace").html("<input type=\"submit\" class=\"btn btn-primary\" id=\"submit_button\" value=\"REGISTRATION\"/>")
     };
 
     //function to validate address field
@@ -289,6 +303,7 @@ var stu_module = ( function() {
     var age_gen = function() {
         var today = new Date();
         birthDate = new Date(dob.val());
+        //alert(dob.val());
         var age = today.getFullYear() - birthDate.getFullYear();
         var m = today.getMonth() - birthDate.getMonth();
         if ((m < 0) || (m == 0) && (today.getDate() > birthDate.getDate())) {
@@ -297,9 +312,25 @@ var stu_module = ( function() {
         return age;
     };
 
+    //funtion to check whether duplicate email ID exists or not
+    var check_email = function(check) {
+        var table = $("#myTable > tbody > tr");
+        for( i = 1 ; i < table.length ; i++ ) {
+            var email = $("table > tbody > tr:eq(" + i + ")  > td:eq(12)").html();
+            if( email == check ) {
+                return true;
+            }
+        }
+        return false;
+    };
+
     //function to validate email field
     var email_val = function() {
-        if(( /\S+@\S+\.(com|org)+/.test(email.val()) == false ) || (email.val() == "")) {
+        if( check_email(email.val()) && ($("#button-replace > input").val() == "REGISTRATION")) {
+            err[16] = 1;
+            email_help.html("USER WITH THIS EMAIL IS ALREADY REGISTERED");
+        }
+        else if(( /\S+@\S+\.(com|org)+/.test(email.val()) == false ) || (email.val() == "")) {
             err[16] = 1;
             email_help.html("INVALID EMAIL");
         }
@@ -352,7 +383,11 @@ var stu_module = ( function() {
     
     //function to validate phone field
     var phone_val = function() {
-        if( /^[1-9]\d{0}$/.test(phone.val()) == false ) {
+        if(check_phone(phone.val()) && ($("#button-replace > input").val() == "REGISTRATION")) {
+            err[15] = 1;
+            phone_help.html("PHONE NUMBER ALREADY EXISTS");
+        }
+        else if( /^[1-9]\d{0}$/.test(phone.val()) == false ) {
             err[15] = 1;
             phone_help.html("INVALID PHONE NUMBER");
         }
@@ -555,27 +590,27 @@ var stu_module = ( function() {
 
 
     //function to validate sic field
-    var sic_val = function () {
-        if(check_sic(sic.val())) {
-            err[3] = 1;
-            sic_help.html("SIC ALREADY EXISTS");
-        }
-        else if(/^[1-9]$/.test(sic.val()) == false ){ 
-            err[3] = 1;
-            sic_help.html("INVALID SIC");
-        }
-        else {
-            err[3] = 0;
-            sic_help.html("");
-        }
-    };
+    // var sic_val = function () {
+    //     if(check_sic(sic.val())) {
+    //         err[3] = 1;
+    //         sic_help.html("SIC ALREADY EXISTS");
+    //     }
+    //     else if(/^[1-9]$/.test(sic.val()) == false ){ 
+    //         err[3] = 1;
+    //         sic_help.html("INVALID SIC");
+    //     }
+    //     else {
+    //         err[3] = 0;
+    //         sic_help.html("");
+    //     }
+    // };
 
-    //function to check duplicate sic in table data
-    var check_sic = function(check) {
+    //function to check duplicate phone number in table data
+    var check_phone = function(check) {
         var table = $("#myTable > tbody > tr");
         for( i = 1 ; i < table.length ; i++ ) {
-            var sic = $("table > tbody > tr:eq(" + i + ")  > td:eq(2)").html();
-            if( sic == check ) {
+            var phone = $("table > tbody > tr:eq(" + i + ")  > td:eq(10)").html();
+            if( phone == check ) {
                 return true;
             }
         }
@@ -585,6 +620,8 @@ var stu_module = ( function() {
     //function to create table data
     var createTable = function() {
         varTemp++;
+        sic++;
+        //alert(sic);
         if(varTemp == 1) {
             createTableHead();
         }
@@ -595,9 +632,9 @@ var stu_module = ( function() {
             nameStr = first.val() + " " + second.val() + " " + third.val();
         }
         var table = $("#myTable > tbody");
-        str = "<tr><td>" + nameStr + "</td><td>" + selected_gender + "</td><td>" + sic.val() + "</td><td>" + fatherName.val() + "</td><td>" + motherName.val() + "</td><td>" + dob.val() + "</td><td>" + hobbyStr + "</td><td>" + X_board.val() + ", ROLL:" + X_roll.val() + ", Secured:" + X_perc.val() + "</td><td>" + XII_board.val() + ", ROLL:" + XII_roll.val() + ", Secured:" + XII_perc.val() + "</td><td>" + dist.val() + ", " + state.val() + "</td><td>" + phone.val() + "</td><td>" + address.val() + "</td><td>" + email.val() + "</td><td><input type=\"button\" id=\"del_btn\" value=\"Delete\" onclick=\"stu_module.exposed_deleteRow(this.parentNode.parentNode.rowIndex)\"/> \/<br> <input type=\"button\" value=\"EDIT\" onclick=\"stu_module.exposed_edit_row(this)\"/></td></tr>";
+        str = "<tr><td>" + nameStr + "</td><td>" + selected_gender + "</td><td>" + sic + "</td><td>" + fatherName.val() + "</td><td>" + motherName.val() + "</td><td>" + dob.val() + "</td><td>" + hobbyStr + "</td><td>" + X_board.val() + ", ROLL:" + X_roll.val() + ", Secured:" + X_perc.val() + "</td><td>" + XII_board.val() + ", ROLL:" + XII_roll.val() + ", Secured:" + XII_perc.val() + "</td><td>" + dist.val() + ", " + state.val() + "</td><td>" + phone.val() + "</td><td>" + address.val() + "</td><td>" + email.val() + "</td><td><input type=\"button\" id=\"del_btn\" value=\"Delete\" onclick=\"stu_module.exposed_deleteRow(this.parentNode.parentNode.rowIndex)\"/> \/<br> <input type=\"button\" value=\"EDIT\" onclick=\"stu_module.exposed_edit_row(this)\"/></td></tr>";
         table.append(str);
-    
+        //alert("appended");
     };
 
 
@@ -609,6 +646,9 @@ var stu_module = ( function() {
         str = "<tr><td>NAME</td><td>GENDER</td><td>SIC</td><td>FATHER NAME</td><td>MOTHER NAME</td><td>DOB</td><td>HOBBIES</td><td>MATRICULATION</td><td>INTERMEDIATE</td><td>DIST AND STATE</td><td>PHONE</td><td>STREET ADDRESS</td><td>EMAIL</td><td>ACTION</td></tr>";
         table.append(str);
     };
+
+
+    //function to edit the saved data from the table and populate on the respective fields
     var edit_row = function(data) {
         clear_fields();
         var count_space = 0;
@@ -682,10 +722,10 @@ var stu_module = ( function() {
 
 
 
-        var sic = $("table > tbody > tr:eq(" + row + ")  > td:eq(2)").html();
-        //alert(sic);
-        $("#sic").val(sic);
-        $("#sic").prop("disabled", true);
+        // var sic = $("table > tbody > tr:eq(" + row + ")  > td:eq(2)").html();
+        // //alert(sic);
+        // $("#sic").val(sic);
+        // $("#sic").prop("disabled", true);
        // $("#sic").prop('diasbled', true);
         var fatherName = $("table > tbody > tr:eq(" + row + ")  > td:eq(3)").html();
         //alert(fatherName);
@@ -867,6 +907,9 @@ var stu_module = ( function() {
         $("#button-replace").html("<button type=\"button\" id= \"update_btn\" class=\"btn btn-secondary\" onclick=\"return stu_module.expose_update_fields("+row+")\" style=\"background-color: rgb(218, 204, 59);\" >UPDATE</button>");
     };
 
+
+
+    //function to validate before updating
     var update_fields = function(data) {
         
         //alert("UPDATE TO : "+ data);
@@ -904,7 +947,10 @@ var stu_module = ( function() {
             //alert("incorrect");
             return false;
         }
-    }
+    };
+
+
+    //function to upload the updated data to the particular field
     var update_record = function(row) {
         //alert("row unmbre :"+row);
         var nameStr = "";
@@ -941,7 +987,7 @@ var stu_module = ( function() {
         $("table > tbody > tr:eq(" + row + ")  > td:eq(12)").html(email.val());
 
 
-    }
+    };
 
 
 
@@ -952,5 +998,6 @@ var stu_module = ( function() {
         exposed_init : init,
         exposed_check_submit : check_submit,
         expose_update_fields : update_fields,
+        exposed_createTableHead : createTableHead,
     }
 })();
