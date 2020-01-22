@@ -236,11 +236,17 @@
                 // crossDomain : true,
                 // dataType : 'json',
                 success : function( result) {
+                    stu_module.exposed_init();
                     stu_module.exposed_createTableHead();
+                    
+                   // alert(stu_module.exposed_sic);
+                   // stu_module.exposed_createTableHead();
                     var table = $("#myTable > tbody");
                     for( var i in result) {
-                        str = "<tr><td>" + result[i].name + "</td><td>" + result[i].gender + "</td><td>" + result[i].sic + "</td><td>" + result[i].fatherName + "</td><td>" + result[i].motherName + "</td><td>" + result[i].dob + "</td><td>" + result[i].hobby + "</td><td>" + result[i].matric +  "</td><td>" + result[i].intermediate + "</td><td>" + result[i].dist_state + "</td><td>" + result[i].phone + "</td><td>" + result[i].address + "</td><td>" + result[i].email + "</td><td><input type=\"button\" id=\"del_btn\" value=\"Delete\" onclick=\"stu_module.exposed_deleteRow(this.parentNode.parentNode.rowIndex)\"/> \/<br> <input type=\"button\" value=\"EDIT\" onclick=\"stu_module.exposed_edit_row(this)\"/></td></tr>";
+                        var sic = stu_module.exposed_ret_sic();
+                        str = "<tr><td>" + result[i].name + "</td><td>" + result[i].gender + "</td><td>" + sic + "</td><td>" + result[i].fatherName + "</td><td>" + result[i].motherName + "</td><td>" + result[i].dob + "</td><td>" + result[i].hobby + "</td><td>" + result[i].matric +  "</td><td>" + result[i].intermediate + "</td><td>" + result[i].dist_state + "</td><td>" + result[i].phone + "</td><td>" + result[i].address + "</td><td>" + result[i].email + "</td><td><input type=\"button\" id=\"del_btn\" value=\"Delete\" onclick=\"stu_module.exposed_deleteRow(this.parentNode.parentNode.rowIndex)\"/> \/<br> <input type=\"button\" value=\"EDIT\" onclick=\"stu_module.exposed_edit_row(this)\"/></td></tr>";
                         table.append(str);
+                        stu_module.exposed_inc_sic();
                     }
                 }
             });

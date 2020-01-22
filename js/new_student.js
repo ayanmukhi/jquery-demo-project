@@ -1,6 +1,6 @@
 var stu_module = ( function() {
     var err = [];
-    var varTemp = 0;
+    var varTemp;
     var selected_gender;
     var gender_help;
     var first;
@@ -9,7 +9,7 @@ var stu_module = ( function() {
     var second_help;
     var third;
     var third_help;
-    var sic = 0;
+    var sic;
     //var sic_help;
     var fatherName;
     var father_help;
@@ -95,7 +95,8 @@ var stu_module = ( function() {
         del = $("#del_btn");
         reset = $("#reset_btn");
         incorrect = $("#invalid_input_data");
-
+        varTemp = 0;
+        sic = 1;
 
         //invoking event listeners functions
         dob.on("keyup", function(){age_check()});
@@ -128,7 +129,9 @@ var stu_module = ( function() {
         $("#reset_btn").on("click", function(){clear_fields()});
     };
 
-
+    var increment_sic = function() {
+        sic++;
+    }
     //function for deleting a row 
     var deleteRow = function(r) {
         //sic--;
@@ -619,10 +622,9 @@ var stu_module = ( function() {
 
     //function to create table data
     var createTable = function() {
-        varTemp++;
-        sic++;
+        
         //alert(sic);
-        if(varTemp == 1) {
+        if(varTemp == 0) {
             createTableHead();
         }
         if( second.val() == "" ) {
@@ -634,6 +636,7 @@ var stu_module = ( function() {
         var table = $("#myTable > tbody");
         str = "<tr><td>" + nameStr + "</td><td>" + selected_gender + "</td><td>" + sic + "</td><td>" + fatherName.val() + "</td><td>" + motherName.val() + "</td><td>" + dob.val() + "</td><td>" + hobbyStr + "</td><td>" + X_board.val() + ", ROLL:" + X_roll.val() + ", Secured:" + X_perc.val() + "</td><td>" + XII_board.val() + ", ROLL:" + XII_roll.val() + ", Secured:" + XII_perc.val() + "</td><td>" + dist.val() + ", " + state.val() + "</td><td>" + phone.val() + "</td><td>" + address.val() + "</td><td>" + email.val() + "</td><td><input type=\"button\" id=\"del_btn\" value=\"Delete\" onclick=\"stu_module.exposed_deleteRow(this.parentNode.parentNode.rowIndex)\"/> \/<br> <input type=\"button\" value=\"EDIT\" onclick=\"stu_module.exposed_edit_row(this)\"/></td></tr>";
         table.append(str);
+        sic++;
         //alert("appended");
     };
 
@@ -641,7 +644,8 @@ var stu_module = ( function() {
 
     //function to create the table header
     var createTableHead = function (){
-
+        varTemp++;
+       // alert("CT"+varTemp);
         var table = $("#myTable > tbody");
         str = "<tr><td>NAME</td><td>GENDER</td><td>SIC</td><td>FATHER NAME</td><td>MOTHER NAME</td><td>DOB</td><td>HOBBIES</td><td>MATRICULATION</td><td>INTERMEDIATE</td><td>DIST AND STATE</td><td>PHONE</td><td>STREET ADDRESS</td><td>EMAIL</td><td>ACTION</td></tr>";
         table.append(str);
@@ -988,7 +992,9 @@ var stu_module = ( function() {
 
 
     };
-
+    var return_sic = function() {
+        return sic;
+    }
 
 
     //making var/objects public
@@ -999,5 +1005,8 @@ var stu_module = ( function() {
         exposed_check_submit : check_submit,
         expose_update_fields : update_fields,
         exposed_createTableHead : createTableHead,
+        exposed_varTemp : varTemp,
+        exposed_inc_sic : increment_sic,
+        exposed_ret_sic : return_sic,
     }
 })();
